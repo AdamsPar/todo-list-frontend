@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from '../interfaces/task';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class TaskService {
   private myApiUrl: string
 
   constructor(private http: HttpClient) {
-    this.myAppUrl = 'http://localhost:3000/'
+    this.myAppUrl = environment.apiUrl
     this.myApiUrl = 'api/tasks'
   }
 
@@ -24,12 +25,16 @@ export class TaskService {
     return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
 
-  createTask(title: string , description: string): Observable<Task> {
-    return this.http.post<Task>(`${this.myAppUrl}${this.myApiUrl}`, {title,description})
+  createTask(title: string, description: string): Observable<Task> {
+    return this.http.post<Task>(`${this.myAppUrl}${this.myApiUrl}`, { title, description })
   }
 
-  updateTask(id: number, task: Task): Observable<Task> {
-    return this.http.put<Task>(`${this.myAppUrl}${this.myApiUrl}/${id}`, task)
+  updateTask(task: Task): Observable<Task> {
+    return this.http.put<Task>(`${this.myAppUrl}${this.myApiUrl}/${task.id}`, task)
+  }
+
+  obtenerInformeXML(): Observable<string> {
+    return this.http.get(`${this.myAppUrl}api/informe.xml`, { responseType: 'text' });
   }
 
 }

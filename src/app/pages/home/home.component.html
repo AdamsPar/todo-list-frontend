@@ -37,7 +37,7 @@
               <p class="description">{{ item.description }}</p>
             </div>
             <div class="actions">
-              <i class="fa-solid fa-pen-to-square"></i>
+              <i (click)="editTask(item)" class="fa-solid fa-pen-to-square"></i>
               <i (click)="eliminateTask(item.id)" class="fa-solid fa-trash"></i>
             </div>
           </li>
@@ -56,7 +56,7 @@
               <p class="description">{{ item.description }}</p>
             </div>
             <div class="actions">
-              <i class="fa-solid fa-pen-to-square"></i>
+              <i (click)="editTask(item)" class="fa-solid fa-pen-to-square"></i>
               <i (click)="eliminateTask(item.id)" class="fa-solid fa-trash"></i>
             </div>
           </li>
@@ -75,7 +75,7 @@
               <p class="description">{{ item.description }}</p>
             </div>
             <div class="actions">
-              <i class="fa-solid fa-pen-to-square"></i>
+              <i (click)="editTask(item)" class="fa-solid fa-pen-to-square"></i>
               <i (click)="eliminateTask(item.id)" class="fa-solid fa-trash"></i>
             </div>
           </li>
@@ -84,18 +84,44 @@
       </div>
     </div>
   </div>
+
+  <button class="add-btn-edit reportBtn" (click)="dowloadReport()">
+    Descargar informe XML
+  </button>
 </body>
 
-<div class="edit-task">
-  <div class="input-section">
-    <input type="text" id="taskTitle" placeholder="Add your task" />
-    <input type="text" id="taskDescription" placeholder="Add a description" />
-
-    <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+@if(showform) {
+<div class="overlay">
+  <div class="edit-task">
+    <div class="input-section-edit">
+      <input
+        type="text"
+        name="editTaskTitle"
+        [(ngModel)]="editTaskTitle"
+        id="taskTitle"
+        placeholder="Add your task"
+      />
+      <input
+        type="text"
+        name="editTaskDescription"
+        [(ngModel)]="editTaskDescription"
+        id="taskDescription"
+        placeholder="Add a description"
+      />
+      <select name="state" name="editTaskState" [(ngModel)]="editTaskState">
+        <option value="pending" selected>Pentiente</option>
+        <option value="in-progress">En Progreso</option>
+        <option value="completed">Completada</option>
+      </select>
+      <div class="btns">
+        <button (click)="showform = false" class="add-btn-cancel">
+          Cancelar <i class="fa-solid fa-x"></i>
+        </button>
+        <button (click)="saveTask()" class="add-btn-edit">
+          Guardar <i class="fa-solid fa-save"></i>
+        </button>
+      </div>
+    </div>
   </div>
-  <select name="state">
-    <option value="pending" selected>Pentiente</option>
-    <option value="in-progress">En Progreso</option>
-    <option value="completed">Completada</option>
-  </select>
 </div>
+}
