@@ -12,24 +12,22 @@ export class HomeComponent {
   pendingTask: Task[] = []
   taskInProgress: Task[] = []
   taskCompleted: Task[] = []
-  constructor(private _taskservice: TaskService){
+  constructor(private _taskservice: TaskService) {
 
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.getTask()
   }
 
-  getTask(){
+  getTask() {
     this._taskservice.getTask().subscribe({
       next: (data) => {
-        this.pendingTask= data.filter((task: Task)=> task.state==='pending')
-        this.taskInProgress= data.filter((task: Task)=> task.state==='in-progress')
-        this.taskCompleted= data.filter((task: Task)=> task.state==='completed')
+        this.pendingTask = data.filter((task: Task) => task.state === 'pending')
+        this.taskInProgress = data.filter((task: Task) => task.state === 'in-progress')
+        this.taskCompleted = data.filter((task: Task) => task.state === 'completed')
       }
     })
   }
-
-  
 
 }
