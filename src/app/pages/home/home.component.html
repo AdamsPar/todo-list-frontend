@@ -1,0 +1,71 @@
+<body>
+    <div class="todo-container">
+      <h2>ToDo List <i class="fa-solid fa-clipboard-list"></i> <i class="fa-solid fa-pen"></i></h2>
+  
+      <div class="input-section">
+        <input type="text" id="taskTitle" placeholder="Add your task" />
+        <button class="add-btn"><i class="fa-solid fa-plus"></i></button>
+      </div>
+  
+      <p class="success-msg">Todo item Created Successfully.</p>
+  
+      <div class="task-sections">
+        <!-- Pendientes -->
+        <div class="task-section">
+          <h3>Pendientes</h3>
+          <ul class="task-list" id="pendiente-list">
+            @for (item of pendingTask; track item.id;let i=$index) {
+            <li class="task">
+                <div class="task-content">
+                  <span class="title">{{item.title}}</span>
+                  <p class="description">{{item.description}}</p>
+                </div>
+                <div class="actions">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  <i class="fa-solid fa-trash"></i>
+                </div>
+              </li>
+            }
+          </ul>
+        </div>
+  
+        <!-- En curso -->
+        <div class="task-section">
+          <h3>En curso</h3>
+          <ul class="task-list" id="encurso-list">
+            @for (item of taskInProgress; track item.id;let i=$index) {
+              <li class="task">
+                  <div class="task-content">
+                    <span class="title">{{item.title}}</span>
+                    <p class="description">{{item.description}}</p>
+                  </div>
+                  <div class="actions">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-trash"></i>
+                  </div>
+                </li>
+              }
+          </ul>
+        </div>
+  
+        <!-- Finalizadas -->
+        <div class="task-section">
+          <h3>Finalizadas</h3>
+          <ul class="task-list" id="finalizada-list">
+            @for (item of taskCompleted; track item.id;let i=$index) {
+              <li class="task completed">
+                  <div class="task-content">
+                    <span class="title">{{item.title}}</span>
+                    <p class="description">{{item.description}}</p>
+                  </div>
+                  <div class="actions">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i class="fa-solid fa-trash"></i>
+                  </div>
+                </li>
+              }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
